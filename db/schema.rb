@@ -10,7 +10,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101212135757) do
+ActiveRecord::Schema.define(:version => 20110125225740) do
+
+  create_table "accounts", :force => true do |t|
+    t.string   "name"
+    t.integer  "retriever_id"
+    t.integer  "sender_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transporters", :force => true do |t|
+    t.string   "type"
+    t.string   "modus"
+    t.string   "address"
+    t.integer  "port"
+    t.string   "domain"
+    t.string   "user_name"
+    t.string   "password"
+    t.string   "authentication"
+    t.boolean  "enable_starttls_auto"
+    t.boolean  "enable_ssl"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "username",             :limit => 20,  :default => "", :null => false
