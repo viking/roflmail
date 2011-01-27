@@ -1,14 +1,20 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
 
-Factory.define :transporter do |f|
-  f.type "MyString"
-  f.modus "MyString"
-  f.address "MyString"
-  f.port 1
-  f.domain "MyString"
-  f.user_name "MyString"
-  f.password "MyString"
-  f.authentication "MyString"
-  f.enable_starttls_auto false
-  f.enable_ssl false
+Factory.define :retriever do |f|
+  f.modus "imap"
+  f.address "mail.example.com"
+  f.port 123
+  f.user_name "foo"
+  f.password "bar"
+  f.enable_ssl true
+end
+
+Factory.define :sender do |f|
+  f.modus "smtp"
+  f.address "mail.example.com"
+  f.port 123
+  f.user_name "foo"
+  f.password "bar"
+  f.authentication "plain"
+  f.enable_starttls_auto true
 end

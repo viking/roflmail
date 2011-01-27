@@ -2,7 +2,9 @@ require 'test_helper'
 
 class AccountsControllerTest < ActionController::TestCase
   setup do
-    @account = Factory(:account)
+    @user = Factory(:user)
+    @account = Factory(:account, :user => @user)
+    sign_in(@user)
   end
 
   test "should get index" do
@@ -25,6 +27,7 @@ class AccountsControllerTest < ActionController::TestCase
   end
 
   test "should show account" do
+    Retriever.any_instance.expects(:find).returns([])
     get :show, :id => @account.to_param
     assert_response :success
   end

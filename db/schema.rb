@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20110125225740) do
     t.string   "name"
     t.integer  "retriever_id"
     t.integer  "sender_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

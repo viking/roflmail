@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
     v.validates_length_of       :password, :within => 6..20, :allow_blank => true
   end
 
+  has_many :accounts
+
   protected
 
     # Checks whether a password is needed or not. For validations only.

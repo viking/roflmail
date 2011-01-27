@@ -4,6 +4,7 @@ class CreateAccounts < ActiveRecord::Migration
       t.string :name
       t.integer :retriever_id
       t.integer :sender_id
+      t.integer :user_id
 
       t.timestamps
     end

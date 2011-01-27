@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
   test "requires username" do
     user = Factory.build(:user, :username => false)
     assert !user.valid?
@@ -11,5 +10,9 @@ class UserTest < ActiveSupport::TestCase
     user_1 = Factory(:user)
     user_2 = Factory.build(:user, :username => user_1.username)
     assert !user_2.valid?
+  end
+
+  test "has_many accounts" do
+    assert_respond_to User.new, :accounts
   end
 end
