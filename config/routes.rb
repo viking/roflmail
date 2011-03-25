@@ -1,5 +1,10 @@
 Roflmail::Application.routes.draw do
-  resources :accounts
+  resources :accounts do
+    member do
+      get 'fetch'
+      get 'mailboxes'
+    end
+  end
 
   get "main/index"
 

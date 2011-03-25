@@ -54,3 +54,10 @@ div.field, div.actions {
   font-size: 12px;
   list-style: square;
 }
+
+li.mailbox {
+  cursor: pointer;
+}
+li.mailbox.current {
+  font-weight: bold;
+}

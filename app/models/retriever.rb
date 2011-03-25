@@ -13,6 +13,15 @@ class Retriever < Transporter
     mail.first(*args, &block)
   end
 
+  def mailboxes(parent = nil)
+    case modus
+    when 'imap'
+      mailboxes = []
+      mail.connection { |imap| mailboxes = imap.list("", parent ? "#{parent}/%" : "%") }
+      mailboxes
+    end
+  end
+
   private
     def mail
       if @mail.nil?

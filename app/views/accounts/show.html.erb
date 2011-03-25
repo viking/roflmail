@@ -1,22 +1,26 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @account.name %></h1>
 
-<p>
-  <b>Name:</b>
-  <%= @account.name %>
-</p>
+<div id="mailboxes">Loading...</div>
+<div id="mail">Loading...</div>
 
-<p>
-  <b>Retriever:</b>
-  <%= @account.retriever_id %>
-</p>
+<script type="text/javascript">
+  $(function() {
+    $('#mailboxes').load("<%= mailboxes_account_path(@account) %>");
+    $('#mail').load("<%= fetch_account_path(@account) %>");
+    $('li.mailbox:not(.current)').live('click', function() {
+      var self = $(this);
+      self.siblings('.current').removeClass('current');
+      self.addClass('current');
 
-<p>
-  <b>Sender:</b>
-  <%= @account.sender_id %>
-</p>
-
-<pre><%= @mail.inspect %></pre>
-
-
-<%= link_to 'Edit', edit_account_path(@account) %> |
-<%= link_to 'Back', accounts_path %>
+      $('#mail').html('Loading...');
+      $.ajax({
+        url: '<%= fetch_account_path(@account) %>',
+        data: {mailbox: self.html()},
+        success: function(data, status, xhr) {
+          $('#mail').html(data);
+        },
+        dataType: 'html'
+      });
+    });
+  });
+</script>

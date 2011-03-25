@@ -16,12 +16,25 @@ class AccountsController < ApplicationController
   # GET /accounts/1.xml
   def show
     @account = current_user.accounts.find(params[:id])
-    @mail = @account.retriever.find
 
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @account }
     end
+  end
+
+  def fetch
+    @account = current_user.accounts.find(params[:id])
+    options = {:count => 10, :order => :desc}
+    options[:mailbox] = params[:mailbox]  if params[:mailbox]
+    @mail = @account.retriever.last(options)
+    render :partial => 'mail'
+  end
+
+  def mailboxes
+    @account = current_user.accounts.find(params[:id])
+    @mailboxes = @account.retriever.mailboxes(params[:mailbox])
+    render :partial => 'mailboxes'
   end
 
   # GET /accounts/new

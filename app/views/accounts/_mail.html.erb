@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <th>From</th>
+      <th>Subject</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%- @mail.each do |message| -%>
+      <tr>
+        <td><%= message['From'] %></td>
+        <td><%= message.subject %></td>
+        <td><%= message.date %></td>
+      </tr>
+    <%- end -%>
+  </tbody>
+</table>

@@ -27,7 +27,7 @@ class AccountsControllerTest < ActionController::TestCase
   end
 
   test "should show account" do
-    Retriever.any_instance.expects(:find).returns([])
+    Retriever.any_instance.expects(:find).never
     get :show, :id => @account.to_param
     assert_response :success
   end
@@ -48,5 +48,33 @@ class AccountsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to accounts_path
+  end
+
+  test "should fetch mail" do
+    retriever = Retriever.any_instance
+    retriever.expects(:last).with(:count => 10, :order => :desc).returns([])
+    xhr :get, :fetch, :id => @account.to_param
+    assert_response :success
+  end
+
+  test "should fetch mail from a specific mailbox" do
+    retriever = Retriever.any_instance
+    retriever.expects(:last).with(:count => 10, :order => :desc, :mailbox => "Travel").returns([])
+    xhr :get, :fetch, :id => @account.to_param, :mailbox => "Travel"
+    assert_response :success
+  end
+
+  test "should get mailboxes" do
+    retriever = Retriever.any_instance
+    retriever.expects(:mailboxes).returns([stub(:name => "INBOX")])
+    xhr :get, :mailboxes, :id => @account.to_param
+    assert_response :success
+  end
+
+  test "should get child mailboxes" do
+    retriever = Retriever.any_instance
+    retriever.expects(:mailboxes).with("Travel").returns([stub(:name => "Space")])
+    xhr :get, :mailboxes, :id => @account.to_param, :mailbox => "Travel"
+    assert_response :success
   end
 end

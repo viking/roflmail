@@ -1,0 +1,7 @@
+<%- if !@mailboxes.empty? -%>
+<ul>
+  <%- @mailboxes.each do |mailbox| -%>
+    <%= mailbox_tag(mailbox.name) %>
+  <%- end -%>
+</ul>
+<%- end -%>
