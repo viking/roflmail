@@ -32,4 +32,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'rails3-generators'
   gem 'mocha', :require => false
+  gem 'test-unit', :require => false
+  gem 'autotest-rails'
 end
